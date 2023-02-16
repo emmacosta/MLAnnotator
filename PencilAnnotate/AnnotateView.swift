@@ -132,7 +132,7 @@ struct AnnotateView: View {
                 }.frame(maxWidth: 250, alignment: .leading)
                 Spacer()
                 
-                Text(network.currentImage.id).frame(maxWidth: .infinity, alignment: .center).shadow(color: .white, radius: 10)
+                Text(network.currentImage.id).padding(15).background(Rectangle().opacity(0.5).foregroundColor(.white).cornerRadius(15)).frame(maxWidth: .infinity, alignment: .center)
                 HStack {
                     Button(action: {
                         showSkip = true
