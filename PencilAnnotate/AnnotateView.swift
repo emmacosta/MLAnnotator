@@ -54,7 +54,7 @@ struct AnnotateView: View {
                     .environmentObject(network)
                     
                     
-                    /*.gesture(DragGesture(minimumDistance: 1)
+                    .gesture(DragGesture(minimumDistance: 1)
                         .onChanged { gesture in
                                 if (!isDrawing) {
                                    
@@ -63,15 +63,16 @@ struct AnnotateView: View {
                                 }
                                 
                             }
-                            .onEnded { value in
+                        .onEnded { value in
                                 if (!isDrawing) {
                                     self.previousOffset = self.currentOffset
                                     
                                     print("drag ended")
                                 }
                             }
+                        
                             
-                        )*/
+                        )
                     .gesture(withAnimation(.easeInOut) {
                             MagnificationGesture()
                                 .onChanged { value in

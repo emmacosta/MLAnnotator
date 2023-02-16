@@ -23,6 +23,7 @@ class Network: ObservableObject {
     
     var url = "https://develop.ewlab.di.unimi.it/apollo/api/"
 
+    // resize the image to make it fit into the screen
     func resizeImage(image: UIImage, newWidth: CGFloat) -> (UIImage, CGFloat) {
         print("width:", image.size.width)
         print("height:", image.size.height)
@@ -37,6 +38,7 @@ class Network: ObservableObject {
         
     }
     
+    // reconvert the coordinates of the points according to the original size of the image
     func convertPoints(points: [CGPoint]) -> [CGPoint] {
         var pointsToSend: [CGPoint] = []
         for i in 0..<points.count {
@@ -56,7 +58,6 @@ class Network: ObservableObject {
         let semaphore = DispatchSemaphore(value: 0)
         let encoder = JSONEncoder()
         let jsonData = try? encoder.encode(User(usr: usr, psw: psw))
-        //let json = String(data: jsonData!, encoding: .utf8)
         
         urlRequest.httpBody = jsonData!
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -189,7 +190,6 @@ class Network: ObservableObject {
                     decodedResponse = try decoder.decode(String.self, from: data!)
                     responseObject = try decoder.decode(ImagesType.self, from: decodedResponse.data(using: .utf8)!)
                     
-                    print(responseObject.id)
                 } catch { return }
                 
                 DispatchQueue.main.async {
@@ -258,15 +258,13 @@ class Network: ObservableObject {
                     decodedResponse = try decoder.decode(String.self, from: data!)
                     responseObject = try decoder.decode(Response.self, from: decodedResponse.data(using: .utf8)!)
                     
-                    print(responseObject.images[0].id)
                 } catch { return }
                 
                 DispatchQueue.main.async {
                     let ids = UserDefaults.standard.stringArray(forKey: "ids")
-                    print(ids as Any)
                     
                     for img in responseObject.images {
-                        print(img.id)
+                        
                         var uiImage = UIImage()
                         var ratio: CGFloat = 1.0
                         guard let ui = img.base64.imageFromBase64 else {
@@ -276,7 +274,7 @@ class Network: ObservableObject {
                         (uiImage, ratio) = self.resizeImage(image: ui, newWidth: self.width)
                         if ids == nil || !(ids?.contains(img.id) ?? true) {
                                 self.localImages.append(LocalImage(ui: uiImage, ratio: ratio, id: img.id))
-                                print(img.id)
+                               
                                 self.ids.append(img.id)
                             
                         }

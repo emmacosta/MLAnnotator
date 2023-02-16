@@ -27,7 +27,7 @@ struct DrawingView: UIViewRepresentable {
    
     
     func makeUIView(context: Context) -> PKCanvasView {
-        print("new view!")
+        //print("new view!")
         canvas.isOpaque = false
         canvas.backgroundColor = UIColor.white
         
@@ -39,7 +39,7 @@ struct DrawingView: UIViewRepresentable {
         content.addSubview(imgView)
         content.sendSubviewToBack(imgView)
         canvas.subviews[1].isOpaque = false
-        canvas.drawingPolicy = .anyInput
+        canvas.drawingPolicy = .pencilOnly
         
         canvas.tool = ink
         canvas.delegate = context.coordinator
@@ -49,26 +49,7 @@ struct DrawingView: UIViewRepresentable {
     
     
     func updateUIView(_ uiView: PKCanvasView, context: Context) {
-        print("trying update")
         
-        /*if (sent) {
-            print("sent!")
-            let imgView = UIImageView(image: img)
-            print(imgView)
-            if uiView.subviews[0].accessibilityElementCount() > 2 {
-                print(uiView.subviews.description)
-                uiView.subviews[0].removeFromSuperview()
-                print("changing image")
-                
-                let newContent = uiView.subviews[0]
-                newContent.addSubview(imgView)
-                newContent.sendSubviewToBack(imgView)
-                
-                print("done change")
-            }
-            
-           
-        }*/
         if (isDrawing) {
             uiView.tool = ink
         }
@@ -125,16 +106,13 @@ struct DrawingView: UIViewRepresentable {
             if !canvasView.drawing.strokes.isEmpty {
                 
                 if check {
-                    print("_______________________")
                     check = false
                     
                     //check if a stroke has been deleted; the number of strokes could have decreased because a stroke has been closed
                     //so I check with lastClosed that this isn't the case; if it is, closePoints and orderedPoints are empty
                     let newNumOfStrokes = canvasView.drawing.strokes.count
-                    print("prev number of strokes: ", numOfStrokes)
-                    print("current number of strokes: ", newNumOfStrokes)
+                    
                     if newNumOfStrokes < numOfStrokes && !lastClosed {
-                        print("deleting points")
                         if !closePoints.isEmpty {
                             closePoints.removeLast()
                             closePoints.removeLast()
@@ -152,11 +130,10 @@ struct DrawingView: UIViewRepresentable {
                             // add points of open line to array closePoints
                             closePoints.append((path?.first?.location)!)
                             closePoints.append((path?.last?.location)!)
-                            print("closePointsHere1: ", closePoints)
                         
                             // case sigle stroke is closed
                             if searchEdges(points: [(path?.first?.location)!, (path?.last?.location)!], numStrokes: 1, strokes: [canvasView.drawing.strokes.last!] ) {
-                                print("closing single stroke")
+                                
                                 while canvasView.drawing.strokes.count > 1 {
                                     canvasView.drawing.strokes.removeFirst()
                                     if closePoints.count > 2 {
@@ -166,16 +143,13 @@ struct DrawingView: UIViewRepresentable {
                                 }
                                 orderedPoints = []
                                 orderedPoints.append([closePoints[0], closePoints[1]])
-                                print("ordered points of single stroke", orderedPoints)
                                 toClose = true
                                 
                             }
                         
-                            print("closePointsHere: ", closePoints)
                             
                             // no single stroke to close
                             if !toClose {
-                                print("not a single stroke")
                                 // check if the strokes in the drawing form a closed stroke
                                 toClose = searchEdges(points: closePoints, numStrokes: newNumOfStrokes, strokes: canvasView.drawing.strokes)
                                 
@@ -185,9 +159,6 @@ struct DrawingView: UIViewRepresentable {
                                 if lastClosed && canvasView.drawing.strokes.count > 1 {
                                     canvasView.drawing.strokes.removeFirst()
                                 }
-                                print("strokes to unite: ", canvasView.drawing.strokes)
-                                print("edges found")
-                                print("uniting edges: ", orderedPoints)
                                 
                                 var closedStroke: [PKStroke] = []
                                 for couple in orderedPoints {
@@ -204,7 +175,6 @@ struct DrawingView: UIViewRepresentable {
                                 closePoints = []
                                 
                                 for stroke in canvasView.drawing.strokes {
-                                    print("stroke to append: ", stroke)
                                     closedStroke.append(stroke)
                                 }
                                 canvasView.drawing.strokes.removeAll()
@@ -241,7 +211,6 @@ struct DrawingView: UIViewRepresentable {
                             else {
                                 
                                 check = false
-                                print("ordered points: ", orderedPoints.count)
                                 // check if the new stroke is far from the previous one; in that case, the previous is deleted
                                 if (orderedPoints == [] && lastClosed &&  closePoints.count == 2) {
                                     print("deleting first stroke")
@@ -265,9 +234,7 @@ struct DrawingView: UIViewRepresentable {
                                     
                                 }
                                             
-                                    
-                                print("points that are close:", closePoints )
-                                print("num of strokes: ", canvasView.drawing.strokes.count)
+                                
                                 check = true
                                 lastClosed = false
                             }
@@ -293,29 +260,23 @@ struct DrawingView: UIViewRepresentable {
         // every time i find a couple i call the function again without the couple: if the array remains empty, it means all vertices have a match so the stroke is closed
         func searchEdges(points: [CGPoint], numStrokes: Int, strokes: [PKStroke]) -> Bool {
             let count = strokes.count
-                    print(points)
                     for i in 0..<points.count {
                         for j in 0..<points.count {
                             if i != j {
                                 print("first point: ", points[i].x, points[i].y, " second point: ", points[j].x, points[j].y)
                                 if (abs(points[i].x-points[j].x)<maximumToClose && abs(points[i].y-points[j].y)<maximumToClose) {
-                                    print("here1")
                                     if !orderedPoints.contains([points[i],points[j]]) && !orderedPoints.contains([points[j],points[i]]) {
                                         orderedPoints.append([points[i],points[j]])
                                         var newPoints = points
                                         newPoints.remove(at: i)
                                         newPoints.remove(at: j-1)
-                                        print("points: ", newPoints)
                                         let newNumStrokes = numStrokes-1
-                                        print("to insert: ", [points[i],points[j]])
                                         
-                                        print("ordered points: ", orderedPoints)
                                         print("inside searchedges numofstrokes: ", newNumStrokes)
                                         if orderedPoints.count == count || (count == 2 && lastClosed) {
                                             return true
                                         }
                                         else {
-                                            print("inside recursive num strokes: ", newNumStrokes)
                                             return searchEdges(points: newPoints, numStrokes: newNumStrokes, strokes: strokes)
                                         }
                                     }
@@ -324,7 +285,6 @@ struct DrawingView: UIViewRepresentable {
                             }
                         }
                     }
-                    print("no")
                     return false
                 }
                 
