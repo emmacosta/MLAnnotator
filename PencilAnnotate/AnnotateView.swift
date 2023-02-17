@@ -56,20 +56,20 @@ struct AnnotateView: View {
                     
                     .gesture(DragGesture(minimumDistance: 1)
                         .onChanged { gesture in
-                                //if (!isDrawing) {
+                                if (!isDrawing) {
                                    
                                     self.currentOffset = CGSize(width: gesture.translation.width + self.previousOffset.width, height: gesture.translation.height + self.previousOffset.height)
                                     print("dragging")
-                               // }
+                               }
                                 
                             }
                         .onEnded { value in
-                                //if (!isDrawing) {
+                                if (!isDrawing) {
                                     self.currentOffset = CGSize(width: value.translation.width + self.previousOffset.width, height: value.translation.height + self.previousOffset.height)
                                     self.previousOffset = self.currentOffset
                                     
                                     print("drag ended")
-                                //}
+                                }
                             }
                         
                             
@@ -247,6 +247,7 @@ struct AnnotateView: View {
                         if currentScale<=minZoomScale {
                             currentScale = 1
                             currentOffset = .zero
+                            previousOffset = .zero
                         }
                         else { currentScale = previousScale - 0.5
                         }
