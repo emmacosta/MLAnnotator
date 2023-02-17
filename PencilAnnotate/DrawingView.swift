@@ -50,12 +50,12 @@ struct DrawingView: UIViewRepresentable {
     
     func updateUIView(_ uiView: PKCanvasView, context: Context) {
         
-        if (isDrawing) {
+        //if (isDrawing) {
             uiView.tool = ink
-        }
-        else {
-            uiView.drawingGestureRecognizer.isEnabled = false
-        }
+        //}
+        //else {
+         //   uiView.drawingGestureRecognizer.isEnabled = false
+        //}
         
         
     }

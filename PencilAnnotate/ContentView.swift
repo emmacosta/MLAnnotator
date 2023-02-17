@@ -46,7 +46,7 @@ struct ContentView: View {
                         print("is empty")
                         if network.localImages.isEmpty {
                             network.getImage(endpoint: "get_img/")
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 15.0) {
                                 notLoaded = true
                             }
                         }

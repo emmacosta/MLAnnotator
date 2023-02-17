@@ -14,7 +14,7 @@ struct AnnotateView: View {
     var colorBackground: UIColor = UIColor (red: 0.96, green: 0.96, blue: 0.96, alpha: 1)
     @State var canvas = PKCanvasView()
     @State var color: Color = .red
-    @State var type: PKInkingTool.InkType = .marker
+    @State var type: PKInkingTool.InkType = .pen
     @State var colorPicker = false
     @State var previousScale: CGFloat = 1.0
     @State var currentScale:CGFloat = 1.0
@@ -56,19 +56,20 @@ struct AnnotateView: View {
                     
                     .gesture(DragGesture(minimumDistance: 1)
                         .onChanged { gesture in
-                                if (!isDrawing) {
+                                //if (!isDrawing) {
                                    
-                                    self.currentOffset = CGSize(width: gesture.translation.width, height: gesture.translation.height)
+                                    self.currentOffset = CGSize(width: gesture.translation.width + self.previousOffset.width, height: gesture.translation.height + self.previousOffset.height)
                                     print("dragging")
-                                }
+                               // }
                                 
                             }
                         .onEnded { value in
-                                if (!isDrawing) {
+                                //if (!isDrawing) {
+                                    self.currentOffset = CGSize(width: value.translation.width + self.previousOffset.width, height: value.translation.height + self.previousOffset.height)
                                     self.previousOffset = self.currentOffset
                                     
                                     print("drag ended")
-                                }
+                                //}
                             }
                         
                             
@@ -270,7 +271,7 @@ struct AnnotateView: View {
                     Image(systemName: "plus.circle").font(.largeTitle)
                 }
                 
-            }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom).padding(.horizontal)
+            }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom).padding(15)
             
             
             
