@@ -11,17 +11,15 @@ struct DrawingView: UIViewRepresentable {
    
     
     @Binding var canvas: PKCanvasView
-    @Binding var type: PKInkingTool.InkType
     @Binding var color: Color
     @Binding var sent: Bool
     @Binding var img: UIImage
-    @Binding var isDrawing: Bool
     
     
      var width: CGFloat = 2
      var ink : PKInkingTool {
         
-         PKInkingTool(type, color: UIColor(color), width: width)
+         PKInkingTool(.pen, color: UIColor(color), width: width)
          
     }
    
@@ -50,12 +48,12 @@ struct DrawingView: UIViewRepresentable {
     
     func updateUIView(_ uiView: PKCanvasView, context: Context) {
         
-        if (isDrawing) {
+        //if (isDrawing) {
             uiView.tool = ink
-        }
+        /*}
         else {
             uiView.drawingGestureRecognizer.isEnabled = false
-        }
+        }*/
         
         
     }
@@ -74,7 +72,7 @@ struct DrawingView: UIViewRepresentable {
         var orderedPoints: [[CGPoint]]
         var numOfStrokes: Int
         var distancePoints: CGFloat = 2
-        var maximumToClose: CGFloat = 50
+        var maximumToClose: CGFloat = 25
         var lastClosed: Bool = false
         var toClose: Bool = false
 
@@ -124,7 +122,6 @@ struct DrawingView: UIViewRepresentable {
                     } else {
                         
                         let path = canvasView.drawing.strokes.last?.path
-                        let ink = canvasView.drawing.strokes.last!.ink
                         
                            
                             // add points of open line to array closePoints
@@ -155,7 +152,7 @@ struct DrawingView: UIViewRepresentable {
                                 
                             }
                             if toClose {
-                                
+                               
                                 if lastClosed && canvasView.drawing.strokes.count > 1 {
                                     canvasView.drawing.strokes.removeFirst()
                                 }
@@ -166,8 +163,7 @@ struct DrawingView: UIViewRepresentable {
                                     let p1 = PKStrokePoint(location: couple[0], timeOffset: 0.1, size: (path?.first!.size)!, opacity: 1, force: 1, azimuth: 0, altitude: 0)
                                     let p2 = PKStrokePoint(location: couple[1], timeOffset: 0.1, size: (path?.last!.size)!, opacity: 1, force: 1, azimuth: 0, altitude: 0)
                                     let path1 = PKStrokePath(controlPoints: [p1, p2], creationDate: Date())
-                                    
-                                    let stroke = PKStroke(ink: parent.drawing.strokes.last!.ink, path: path1)
+                                    let stroke = PKStroke(ink: PKInk(.pen, color: .red), path: path1)
                                     //add strokes that close the drawen path to closedStroke
                                     closedStroke.append(stroke)
                                 }
@@ -200,11 +196,13 @@ struct DrawingView: UIViewRepresentable {
                                 }
                                 
                                 let newPath = PKStrokePath(controlPoints: orderPoints, creationDate: Date())
-                                let myStroke = PKStroke(ink: ink, path: newPath)
+                                let myStroke = PKStroke(ink: PKInk(.pen, color: .green), path: newPath)
                                 orderedPoints = []
                                 lastClosed = true
                                 toClose = false
                                 canvasView.drawing.strokes.append(myStroke)
+                                
+                                parent.tool =  PKInkingTool(.pen, color: UIColor(.red), width: 2)
                                 
                                 check = true
                             }

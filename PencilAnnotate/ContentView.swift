@@ -5,13 +5,12 @@
 
 import SwiftUI
 
-
-
 struct ContentView: View {
     @EnvironmentObject var viewRouter: ViewRouter
     @EnvironmentObject var network: Network
-    var colorBackground: UIColor = UIColor (red: 0.96, green: 0.96, blue: 0.96, alpha: 1)
     @State var notLoaded = false
+    var colorBackground: UIColor = UIColor (red: 0.96, green: 0.96, blue: 0.96, alpha: 1)
+  
     var body: some View {
         
         switch viewRouter.currentPage {
@@ -25,6 +24,7 @@ struct ContentView: View {
             if network.done {
                 DoneView()
             } else {
+                // image not yet loaded
                 if (network.currentImage.ui == UIImage()) {
                     ZStack {
                         Color(colorBackground).ignoresSafeArea()
@@ -59,22 +59,20 @@ struct ContentView: View {
                     
                     .transition(.asymmetric(insertion:  .move(edge: .trailing), removal: .move(edge: .trailing)))
                 } else {
-                    
-                    AnnotateView()//.environmentObject(network)
+                    // image loaded
+                    AnnotateView()
                         .onAppear {
                             notLoaded = false
                             print("nuovo ID:", network.currentImage.id)
                             print("nuovo UI:", $network.currentImage.ui)
                         }
-                        
-                        
-                        
-                        
                 }
             }
+            
         case .done:
             DoneView()
             
+        // loading next image
         case .changing:
             ZStack {
                 Color(colorBackground).ignoresSafeArea()

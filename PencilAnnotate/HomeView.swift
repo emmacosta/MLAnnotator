@@ -8,11 +8,8 @@ import SwiftUI
 
 struct HomeView: View {
     @EnvironmentObject var viewRouter: ViewRouter
-    
     @EnvironmentObject var network: Network
     var colorBackground: UIColor = UIColor (red: 0.96, green: 0.96, blue: 0.96, alpha: 1)
-    
-    let url =  "https://develop.ewlab.di.unimi.it/:3005/get_img/"
     
     var body: some View {
         ZStack {
@@ -56,9 +53,6 @@ struct HomeView: View {
             }.padding(10)
         }
         .transition(viewRouter.transitionHome)
-        
-        
-        
         
     }
     

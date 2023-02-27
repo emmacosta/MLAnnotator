@@ -14,8 +14,6 @@ struct AnnotateView: View {
     var colorBackground: UIColor = UIColor (red: 0.96, green: 0.96, blue: 0.96, alpha: 1)
     @State var canvas = PKCanvasView()
     @State var color: Color = .red
-    @State var type: PKInkingTool.InkType = .pen
-    @State var colorPicker = false
     @State var previousScale: CGFloat = 1.0
     @State var currentScale:CGFloat = 1.0
     @State var minZoomScale: CGFloat = 1.0
@@ -24,7 +22,7 @@ struct AnnotateView: View {
     @State var previousOffset: CGSize = CGSize.zero
     @State var showSent: Bool = false
     @State var showSkip: Bool = false
-    @State var isDrawing: Bool = true
+    //@State var isDrawing: Bool = true
     @State var sent: Bool = false
     @State var showAlert: Bool = false
     @State var sendingAlert: Bool = false
@@ -48,7 +46,7 @@ struct AnnotateView: View {
         ZStack{
             Color(colorBackground).ignoresSafeArea()
             // canva
-            DrawingView(canvas: $canvas, type: $type, color: $color, sent: $sent, img: $network.currentImage.ui, isDrawing: $isDrawing)
+            DrawingView(canvas: $canvas, color: $color, sent: $sent, img: $network.currentImage.ui)
                     .scaleEffect(max(self.currentScale, 1.0))
                     .offset(currentOffset)
                     .environmentObject(network)
@@ -56,20 +54,20 @@ struct AnnotateView: View {
                     
                     .gesture(DragGesture(minimumDistance: 1)
                         .onChanged { gesture in
-                                if (!isDrawing) {
+                                //if (!isDrawing) {
                                    
                                     self.currentOffset = CGSize(width: gesture.translation.width + self.previousOffset.width, height: gesture.translation.height + self.previousOffset.height)
                                     print("dragging")
-                               }
+                              // }
                                 
                             }
                         .onEnded { value in
-                                if (!isDrawing) {
+                                //if (!isDrawing) {
                                     self.currentOffset = CGSize(width: value.translation.width + self.previousOffset.width, height: value.translation.height + self.previousOffset.height)
                                     self.previousOffset = self.currentOffset
                                     
                                     print("drag ended")
-                                }
+                                //}
                             }
                         
                             
@@ -77,19 +75,22 @@ struct AnnotateView: View {
                     .gesture(withAnimation(.easeInOut) {
                             MagnificationGesture()
                                 .onChanged { value in
-                                    print("Now current scale:", self.currentScale)
-                                    print("value:", value)
-                                    print("previous scale", self.previousScale)
-                                    let delta = value / self.previousScale
-                                    self.previousScale = value
-                                    if currentScale>maxZoomScale {
-                                        self.currentScale = maxZoomScale
+                                    withAnimation {
+                                        print("Now current scale:", self.currentScale)
+                                        print("value:", value)
+                                        print("previous scale", self.previousScale)
+                                        let delta = value / self.previousScale
+                                        self.previousScale = value
+                                        if currentScale>maxZoomScale {
+                                            self.currentScale = maxZoomScale
+                                        }
+                                        if currentScale<minZoomScale {
+                                            self.currentScale = minZoomScale
+                                            
+                                            self.currentOffset = .zero
+                                        }
+                                        self.currentScale = self.currentScale * delta
                                     }
-                                    if currentScale<minZoomScale {
-                                        self.currentScale = minZoomScale
-                                        self.currentOffset = .zero
-                                    }
-                                    self.currentScale = self.currentScale * delta
                                     
                                 }
                                 .onEnded { value in
@@ -99,26 +100,6 @@ struct AnnotateView: View {
                             
                         
                     })
-                  
-                    
-                    /*.onTapGesture(count: 2) { value in
-                        withAnimation(.easeInOut){
-                            
-                            //print("x: ", -value.x, " y: ", -value.y)
-                            self.currentOffset = CGSize(width: value.x, height: value.y)
-                            self.previousOffset = self.currentOffset
-                            self.previousScale = 1.0
-                            self.currentScale = self.currentScale*1.5
-                            if self.currentScale>self.maxZoomScale {
-                                self.currentScale = self.maxZoomScale
-                            }
-                            if self.currentScale == 1 {
-                                self.currentOffset = .zero
-                            }
-                            print("curr scale ", self.currentScale)
-                        }
-                    }*/
-                
                     .frame(width: network.currentImage.ui.size.width, height: network.currentImage.ui.size.height)
              
             // back button, save and send mask
@@ -130,10 +111,10 @@ struct AnnotateView: View {
                 })
                 {
                     Image(systemName: "chevron.backward").padding(.horizontal)
-                }.frame(maxWidth: 250, alignment: .leading)
+                }.frame(maxWidth: 200, alignment: .leading)
                 Spacer()
-                
-                Text(network.currentImage.id).padding(15).background(Rectangle().opacity(0.5).foregroundColor(.white).cornerRadius(15)).frame(maxWidth: .infinity, alignment: .center)
+                Text(network.currentImage.id).padding(15).background(Rectangle().opacity(0.5).foregroundColor(.white).cornerRadius(15))
+                Spacer()
                 HStack {
                     Button(action: {
                         showSkip = true
@@ -146,7 +127,7 @@ struct AnnotateView: View {
                             .foregroundColor(.red)
                     }).alert(isPresented: $showSkip) {
                         
-                        Alert(title: Text("Salta annotazione"),message: Text("Vuoi saltare l'annotazione di questa immagine?"), primaryButton: .cancel(Text("Chiudi")), secondaryButton: .destructive(Text("Salta")) {
+                        Alert(title: Text("Salta annotazione"),message: Text("Vuoi saltare l'annotazione di questa immagine?"), primaryButton: .destructive(Text("Chiudi")), secondaryButton: .default(Text("Salta")) {
                             let confirm = network.sendCoords(points: [], id: network.currentImage.id)
                             if confirm {
                                 handleNext()
@@ -172,14 +153,14 @@ struct AnnotateView: View {
                         
                     }, label: {
                         
-                        Text("Invia Maschera").padding(15).background(Rectangle().cornerRadius(15).foregroundColor(Color(UIColor.systemBlue))).foregroundColor(.white)
+                        Text("Invia").padding(15).background(Rectangle().cornerRadius(15).foregroundColor(Color(UIColor.systemBlue))).foregroundColor(.white)
                         
                     })
                     .alert(isPresented: $showAlert) {
                         switch activeAlert {
                             case .sending:
                             
-                                return Alert(title: Text("Inviare annotazione?"), primaryButton: .default(Text("Conferma")) {
+                                return Alert(title: Text("Inviare annotazione?"), primaryButton: .destructive(Text("Annulla")), secondaryButton:  .default(Text("Conferma")) {
                                     let confirm = network.sendCoords(points: viewPoints, id: network.currentImage.id)
                                     if confirm {
                                        handleNext()
@@ -192,7 +173,7 @@ struct AnnotateView: View {
                                     
                                     
                                     
-                                }, secondaryButton: .destructive(Text("Annulla")) )
+                                })
                             case .maskError:
                                 return Alert(title: Text("Errore"), message: Text("Invio non riuscito"), dismissButton: .default(Text("Chiudi")))
                             
@@ -202,7 +183,7 @@ struct AnnotateView: View {
                         
                         
                     }
-                }.frame(maxWidth: 250, alignment: .trailing)
+                }.frame(maxWidth: 200, alignment: .trailing)
                 
                     
                 
@@ -211,7 +192,7 @@ struct AnnotateView: View {
             
             // drawing/dragging buttons, delete last stroke, zoom
             HStack {
-                Button(action: {  // pencil tool
+                /*Button(action: {  // pencil tool
                     isDrawing = true
                 }) {
                     
@@ -227,7 +208,7 @@ struct AnnotateView: View {
                     Image(systemName: "arrow.up.and.down.and.arrow.left.and.right")
                         .font(.largeTitle)
                 }.disabled(!isDrawing).padding(.trailing)
-                
+                */
                 
                 Button {
                     _ = canvas.drawing.strokes.popLast()
@@ -274,15 +255,9 @@ struct AnnotateView: View {
                 
             }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom).padding(15)
             
-            
-            
-        }/*.alert(isPresented: $showErrorSent) {
-            Alert(title: Text("Impossibile inviare i dati"), dismissButton: .default(Text("Chiudi")))
-        }*/
+        }
         .transition(viewRouter.transitionImage)
 
-        
-        
     }
     
   
@@ -309,7 +284,6 @@ struct AnnotateView: View {
         var ids = UserDefaults.standard.stringArray(forKey: "ids")
         if ids == nil {
             UserDefaults.standard.set([network.currentImage.id], forKey: "ids")
-            print("current ids: ", ids as Any)
         } else {
             ids?.append(network.currentImage.id)
             UserDefaults.standard.set(ids, forKey: "ids")

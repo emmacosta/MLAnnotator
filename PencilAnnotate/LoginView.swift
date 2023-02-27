@@ -15,9 +15,6 @@ struct LoginView: View {
     @State var psw: String = ""
     // ee095a3061f7a59bfdac6d3d739239ed
     @State var showEmptyAlert: Bool = false
-    @State private var shouldAnimate = false
-    
-    
     
     
     var body: some View {
@@ -31,6 +28,7 @@ struct LoginView: View {
                 }.padding(10)
                 VStack {
                     HStack {
+                        
                         Text("Username: ")
                         TextField("username", text: $username)
                         
@@ -39,21 +37,17 @@ struct LoginView: View {
                     HStack {
                         
                         Text("Password: ")
-                        
                         SecureField("password", text: $psw)
-                        
                         //TextField("password", text: $psw)
+                        
                     }.padding(15).background(Rectangle().cornerRadius(15).foregroundColor(.white)).shadow(radius: 10)
                     
                     Button(action: {
                         withAnimation() {
-                            shouldAnimate = true
                             if (!username.isEmpty && !psw.isEmpty && network.login(usr: username, psw: psw)) {
                                 
                                 print("username: ", username)
                                 print("psw: ", psw)
-                                
-                                
                                 UserDefaults.standard.set(self.username, forKey: "user")
                                 UserDefaults.standard.set(self.psw, forKey: "psw")
                                 
@@ -72,14 +66,11 @@ struct LoginView: View {
                         Alert(title: Text("Login fallito"),message: Text("Impossibile effettuare il login"), dismissButton: .cancel(Text("Chiudi")))
                     }
                             
-                        
                     
                 }
                     
                 }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center).padding(10)
          
-            
-            
         }.transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)))
     }
 }
