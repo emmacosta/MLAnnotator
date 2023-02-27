@@ -211,12 +211,12 @@ struct DrawingView: UIViewRepresentable {
                                 check = false
                                 // check if the new stroke is far from the previous one; in that case, the previous is deleted
                                 if (orderedPoints == [] && lastClosed &&  closePoints.count == 2) {
-                                    print("deleting first stroke")
+                                    //print("deleting first stroke")
                                     canvasView.drawing.strokes.removeFirst()
                                 }
                                 // check if the new stroke is far from the previous multiple strokes (which are close to each other); in that case, the previous strokes are deleted
                                 if (!lastClosed && (closePoints.count > orderedPoints.count*2+2)) {
-                                    print("deleting first strokes")
+                                    //print("deleting first strokes")
                                     
                                     let toDelete = closePoints.count/2
                                     
@@ -261,7 +261,7 @@ struct DrawingView: UIViewRepresentable {
                     for i in 0..<points.count {
                         for j in 0..<points.count {
                             if i != j {
-                                print("first point: ", points[i].x, points[i].y, " second point: ", points[j].x, points[j].y)
+                                //print("first point: ", points[i].x, points[i].y, " second point: ", points[j].x, points[j].y)
                                 if (abs(points[i].x-points[j].x)<maximumToClose && abs(points[i].y-points[j].y)<maximumToClose) {
                                     if !orderedPoints.contains([points[i],points[j]]) && !orderedPoints.contains([points[j],points[i]]) {
                                         orderedPoints.append([points[i],points[j]])
@@ -270,7 +270,7 @@ struct DrawingView: UIViewRepresentable {
                                         newPoints.remove(at: j-1)
                                         let newNumStrokes = numStrokes-1
                                         
-                                        print("inside searchedges numofstrokes: ", newNumStrokes)
+                                        //print("inside searchedges numofstrokes: ", newNumStrokes)
                                         if orderedPoints.count == count || (count == 2 && lastClosed) {
                                             return true
                                         }

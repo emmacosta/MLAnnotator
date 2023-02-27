@@ -43,7 +43,7 @@ struct ContentView: View {
                         
                         
                     }.onAppear {
-                        print("is empty")
+                        //print("is empty")
                         if network.localImages.isEmpty {
                             network.getImage(endpoint: "get_img/")
                             DispatchQueue.main.asyncAfter(deadline: .now() + 15.0) {
@@ -64,7 +64,6 @@ struct ContentView: View {
                         .onAppear {
                             notLoaded = false
                             print("nuovo ID:", network.currentImage.id)
-                            print("nuovo UI:", $network.currentImage.ui)
                         }
                 }
             }

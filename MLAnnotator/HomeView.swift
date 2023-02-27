@@ -25,7 +25,7 @@ struct HomeView: View {
                         withAnimation() {
                             print("user: ", (UserDefaults.standard.string(forKey: "user"))! as Any)
                             print("psw: ", (UserDefaults.standard.string(forKey: "psw"))! as Any)
-                            print("image: ", (UserDefaults.standard.integer(forKey: "image")) as Any)
+                            //print("image: ", (UserDefaults.standard.integer(forKey: "image")) as Any)
                             print("ids: ", (UserDefaults.standard.stringArray(forKey: "ids")) as Any)
                            
                             viewRouter.transitionHome = .asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading))

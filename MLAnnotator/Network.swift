@@ -25,8 +25,8 @@ class Network: ObservableObject {
 
     // resize the image to make it fit into the screen
     func resizeImage(image: UIImage, newWidth: CGFloat) -> (UIImage, CGFloat) {
-        print("width:", image.size.width)
-        print("height:", image.size.height)
+        //print("width:", image.size.width)
+        //print("height:", image.size.height)
         let scale = newWidth / image.size.width
         let newHeight = image.size.height * scale
         UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight))
@@ -182,8 +182,8 @@ class Network: ObservableObject {
                 var responseObject = ImagesType(id: "", base64: "")
                 let decoder = JSONDecoder()
                 
-                let strData = String(data: data!.prefix(100), encoding: .utf8)!
-                print(strData)
+                //let strData = String(data: data!.prefix(100), encoding: .utf8)!
+                //print(strData)
                 
                 do {
                     
@@ -251,8 +251,8 @@ class Network: ObservableObject {
                 var responseObject = Response(images: [])
                 let decoder = JSONDecoder()
                 
-                let strData = String(data: data!.prefix(100), encoding: .utf8)!
-                print(strData)
+                //let strData = String(data: data!.prefix(100), encoding: .utf8)!
+                //print(strData)
                 
                 do {
                     decodedResponse = try decoder.decode(String.self, from: data!)

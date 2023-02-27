@@ -56,7 +56,7 @@ struct AnnotateView: View {
                                 //if (!isDrawing) {
                                    
                                     self.currentOffset = CGSize(width: gesture.translation.width + self.previousOffset.width, height: gesture.translation.height + self.previousOffset.height)
-                                    print("dragging")
+                                    //print("dragging")
                               // }
                                 
                             }
@@ -75,9 +75,9 @@ struct AnnotateView: View {
                             MagnificationGesture()
                                 .onChanged { value in
                                     withAnimation {
-                                        print("Now current scale:", self.currentScale)
-                                        print("value:", value)
-                                        print("previous scale", self.previousScale)
+                                        //print("Now current scale:", self.currentScale)
+                                        //print("value:", value)
+                                        //print("previous scale", self.previousScale)
                                         let delta = value / self.previousScale
                                         self.previousScale = value
                                         if currentScale>maxZoomScale {
