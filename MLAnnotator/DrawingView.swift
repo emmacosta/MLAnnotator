@@ -62,6 +62,7 @@ struct DrawingView: UIViewRepresentable {
         
         return Coordinator(self.canvas)
     }
+    
 
     class Coordinator: NSObject, PKCanvasViewDelegate {
         
