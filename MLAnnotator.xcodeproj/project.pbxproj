@@ -21,7 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B56E8F1C296F61F800035DAC /* AnnotatorML.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnnotatorML.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B56E8F1C296F61F800035DAC /* MLAnnotator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MLAnnotator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B56E8F1F296F61F800035DAC /* Annotator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Annotator.swift; sourceTree = "<group>"; };
 		B56E8F21296F61F800035DAC /* AnnotateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotateView.swift; sourceTree = "<group>"; };
 		B56E8F23296F61FA00035DAC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -57,7 +57,7 @@
 		B56E8F1D296F61F800035DAC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B56E8F1C296F61F800035DAC /* AnnotatorML.app */,
+				B56E8F1C296F61F800035DAC /* MLAnnotator.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -91,9 +91,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B56E8F1B296F61F800035DAC /* AnnotatorML */ = {
+		B56E8F1B296F61F800035DAC /* MLAnnotator */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B56E8F2A296F61FA00035DAC /* Build configuration list for PBXNativeTarget "AnnotatorML" */;
+			buildConfigurationList = B56E8F2A296F61FA00035DAC /* Build configuration list for PBXNativeTarget "MLAnnotator" */;
 			buildPhases = (
 				B56E8F18296F61F800035DAC /* Sources */,
 				B56E8F19296F61F800035DAC /* Frameworks */,
@@ -103,9 +103,9 @@
 			);
 			dependencies = (
 			);
-			name = AnnotatorML;
+			name = MLAnnotator;
 			productName = PencilAnnotate;
-			productReference = B56E8F1C296F61F800035DAC /* AnnotatorML.app */;
+			productReference = B56E8F1C296F61F800035DAC /* MLAnnotator.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -136,7 +136,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B56E8F1B296F61F800035DAC /* AnnotatorML */,
+				B56E8F1B296F61F800035DAC /* MLAnnotator */,
 			);
 		};
 /* End PBXProject section */
@@ -365,7 +365,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B56E8F2A296F61FA00035DAC /* Build configuration list for PBXNativeTarget "AnnotatorML" */ = {
+		B56E8F2A296F61FA00035DAC /* Build configuration list for PBXNativeTarget "MLAnnotator" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B56E8F2B296F61FA00035DAC /* Debug */,
