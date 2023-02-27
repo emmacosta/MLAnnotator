@@ -5,7 +5,7 @@ L'utilizzo è facilitato da un algoritmo che chiude automaticamente tratti (sing
 È presente un login che identifica l'utente con username e password e salva i dati in memoria persistente.
 
 
-## Sviluppo
+### Sviluppo
 L'app è stata sviluppata con il linguaggio Swift e i framework SwiftUI e PencilKit.
 
 
@@ -13,7 +13,7 @@ L'app è stata sviluppata con il linguaggio Swift e i framework SwiftUI e Pencil
 - iOS 16+
 - XCode 14.2
 
-## To-do
+### To-do
 Tra i possibili miglioramenti dell'app si segnalano:
 - Rimozione della conferma di invio per rendere più veloce il processo di annotazione;
 - Possibilità di tornare all'annotazione dell'immagine precedente;
