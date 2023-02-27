@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:">
+      location = "self:/Users/emma/Desktop/mobidev/PencilAnnotate-07-02/MLAnnotator.xcodeproj">
    </FileRef>
 </Workspace>

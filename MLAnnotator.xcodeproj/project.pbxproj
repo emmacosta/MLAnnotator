@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B56E8F20296F61F800035DAC /* PencilAnnotateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56E8F1F296F61F800035DAC /* PencilAnnotateApp.swift */; };
+		B56E8F20296F61F800035DAC /* Annotator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56E8F1F296F61F800035DAC /* Annotator.swift */; };
 		B56E8F22296F61F800035DAC /* AnnotateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56E8F21296F61F800035DAC /* AnnotateView.swift */; };
 		B56E8F24296F61FA00035DAC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B56E8F23296F61FA00035DAC /* Assets.xcassets */; };
 		B56E8F27296F61FA00035DAC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B56E8F26296F61FA00035DAC /* Preview Assets.xcassets */; };
@@ -21,8 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B56E8F1C296F61F800035DAC /* PencilAnnotate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PencilAnnotate.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		B56E8F1F296F61F800035DAC /* PencilAnnotateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PencilAnnotateApp.swift; sourceTree = "<group>"; };
+		B56E8F1C296F61F800035DAC /* AnnotatorML.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnnotatorML.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B56E8F1F296F61F800035DAC /* Annotator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Annotator.swift; sourceTree = "<group>"; };
 		B56E8F21296F61F800035DAC /* AnnotateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotateView.swift; sourceTree = "<group>"; };
 		B56E8F23296F61FA00035DAC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B56E8F26296F61FA00035DAC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -49,7 +49,7 @@
 		B56E8F13296F61F800035DAC = {
 			isa = PBXGroup;
 			children = (
-				B56E8F1E296F61F800035DAC /* PencilAnnotate */,
+				B56E8F1E296F61F800035DAC /* MLAnnotator */,
 				B56E8F1D296F61F800035DAC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -57,15 +57,15 @@
 		B56E8F1D296F61F800035DAC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B56E8F1C296F61F800035DAC /* PencilAnnotate.app */,
+				B56E8F1C296F61F800035DAC /* AnnotatorML.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B56E8F1E296F61F800035DAC /* PencilAnnotate */ = {
+		B56E8F1E296F61F800035DAC /* MLAnnotator */ = {
 			isa = PBXGroup;
 			children = (
-				B56E8F1F296F61F800035DAC /* PencilAnnotateApp.swift */,
+				B56E8F1F296F61F800035DAC /* Annotator.swift */,
 				B57402D32970247700DC24B9 /* ViewRouter.swift */,
 				B5A5C8B1297554EC0022A94F /* Network.swift */,
 				B57402D52970256C00DC24B9 /* ContentView.swift */,
@@ -77,7 +77,7 @@
 				B56E8F23296F61FA00035DAC /* Assets.xcassets */,
 				B56E8F25296F61FA00035DAC /* Preview Content */,
 			);
-			path = PencilAnnotate;
+			path = MLAnnotator;
 			sourceTree = "<group>";
 		};
 		B56E8F25296F61FA00035DAC /* Preview Content */ = {
@@ -91,9 +91,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B56E8F1B296F61F800035DAC /* PencilAnnotate */ = {
+		B56E8F1B296F61F800035DAC /* AnnotatorML */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B56E8F2A296F61FA00035DAC /* Build configuration list for PBXNativeTarget "PencilAnnotate" */;
+			buildConfigurationList = B56E8F2A296F61FA00035DAC /* Build configuration list for PBXNativeTarget "AnnotatorML" */;
 			buildPhases = (
 				B56E8F18296F61F800035DAC /* Sources */,
 				B56E8F19296F61F800035DAC /* Frameworks */,
@@ -103,9 +103,9 @@
 			);
 			dependencies = (
 			);
-			name = PencilAnnotate;
+			name = AnnotatorML;
 			productName = PencilAnnotate;
-			productReference = B56E8F1C296F61F800035DAC /* PencilAnnotate.app */;
+			productReference = B56E8F1C296F61F800035DAC /* AnnotatorML.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -123,7 +123,7 @@
 					};
 				};
 			};
-			buildConfigurationList = B56E8F17296F61F800035DAC /* Build configuration list for PBXProject "PencilAnnotate" */;
+			buildConfigurationList = B56E8F17296F61F800035DAC /* Build configuration list for PBXProject "MLAnnotator" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -136,7 +136,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B56E8F1B296F61F800035DAC /* PencilAnnotate */,
+				B56E8F1B296F61F800035DAC /* AnnotatorML */,
 			);
 		};
 /* End PBXProject section */
@@ -162,7 +162,7 @@
 				B57402D62970256C00DC24B9 /* ContentView.swift in Sources */,
 				B56E8F22296F61F800035DAC /* AnnotateView.swift in Sources */,
 				B57402D82970568600DC24B9 /* DrawingView.swift in Sources */,
-				B56E8F20296F61F800035DAC /* PencilAnnotateApp.swift in Sources */,
+				B56E8F20296F61F800035DAC /* Annotator.swift in Sources */,
 				B591E32529911ED600115824 /* DoneView.swift in Sources */,
 				B5A5C8B2297554EC0022A94F /* Network.swift in Sources */,
 				B577F97B2982D90B003D43B1 /* LoginView.swift in Sources */,
@@ -294,8 +294,8 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"PencilAnnotate/Preview Content\"";
-				DEVELOPMENT_TEAM = 54LA74JLVY;
+				DEVELOPMENT_ASSET_PATHS = "\"MLAnnotator/Preview Content\"";
+				DEVELOPMENT_TEAM = Q82F8AQ3AB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -303,16 +303,20 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = emma.PencilAnnotate;
+				PRODUCT_BUNDLE_IDENTIFIER = emma.MLAnnotator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -323,8 +327,8 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"PencilAnnotate/Preview Content\"";
-				DEVELOPMENT_TEAM = 54LA74JLVY;
+				DEVELOPMENT_ASSET_PATHS = "\"MLAnnotator/Preview Content\"";
+				DEVELOPMENT_TEAM = Q82F8AQ3AB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -332,23 +336,27 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = emma.PencilAnnotate;
+				PRODUCT_BUNDLE_IDENTIFIER = emma.MLAnnotator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B56E8F17296F61F800035DAC /* Build configuration list for PBXProject "PencilAnnotate" */ = {
+		B56E8F17296F61F800035DAC /* Build configuration list for PBXProject "MLAnnotator" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B56E8F28296F61FA00035DAC /* Debug */,
@@ -357,7 +365,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B56E8F2A296F61FA00035DAC /* Build configuration list for PBXNativeTarget "PencilAnnotate" */ = {
+		B56E8F2A296F61FA00035DAC /* Build configuration list for PBXNativeTarget "AnnotatorML" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B56E8F2B296F61FA00035DAC /* Debug */,

@@ -6,7 +6,7 @@
 import SwiftUI
 
 @main
-struct PencilAnnotateApp: App {
+struct Annotator: App {
     @StateObject var viewRouter = ViewRouter()
     @StateObject var newtork = Network()
     var body: some Scene {
