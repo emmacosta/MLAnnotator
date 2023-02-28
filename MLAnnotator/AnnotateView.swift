@@ -112,8 +112,8 @@ struct AnnotateView: View {
                     Image(systemName: "chevron.backward").padding(.horizontal)
                 }.frame(maxWidth: 200, alignment: .leading)
                 Spacer()
-                /*Text(network.currentImage.id).padding(15).background(Rectangle().opacity(0.5).foregroundColor(.white).cornerRadius(15))
-                Spacer()*/
+                Text(network.currentImage.id).padding(15).background(Rectangle().opacity(0.5).foregroundColor(.white).cornerRadius(15))
+                Spacer()
                 HStack {
                     Button(action: {
                         showSkip = true
