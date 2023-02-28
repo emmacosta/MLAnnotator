@@ -11,7 +11,7 @@ L'app è stata sviluppata con il linguaggio Swift e i framework SwiftUI e Pencil
 
 ### Requisiti
 - iOS 16+
-- XCode 14.2
+- XCode 14
 
 ### To do
 Tra i possibili miglioramenti dell'app si segnalano:
