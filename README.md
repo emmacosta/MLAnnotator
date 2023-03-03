@@ -17,4 +17,5 @@ L'app è stata sviluppata con il linguaggio Swift e i framework SwiftUI e Pencil
 Tra i possibili miglioramenti dell'app si segnalano:
 - Rimozione della conferma di invio per rendere più veloce il processo di annotazione;
 - Possibilità di tornare all'annotazione dell'immagine precedente;
-- Funzione "annulla" che ridisegna l'ultimo tratto cancellato.
+- Funzione "annulla" che ridisegna l'ultimo tratto cancellato;
+- Impostazione di una lunghezza minima del tratto per la chiusura dello stesso.
